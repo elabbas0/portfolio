@@ -1,0 +1,234 @@
+/* ========================= */
+/* RESET / BASE */
+/* ========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    overflow-x: hidden; /* Prevent horizontal scroll at the root */
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: black;
+    color: #fff;
+    font-family: system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
+    width: 100%;
+}
+
+/* ========================= */
+/* WELCOME SCREEN */
+/* ========================= */
+#welcome {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(180deg, #ffa63d 0%, #eb8929 45%, #8c460f 100%);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    z-index: 9999;
+    animation: fadeOut 1s ease forwards;
+    animation-delay: 2s;
+}
+
+@keyframes fadeOut {
+    to { opacity: 0; visibility: hidden; }
+}
+
+/* ========================= */
+/* NAVBAR */
+/* ========================= */
+#nav {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    width: 100%;
+    padding: 20px 0;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    opacity: 0;
+    animation: fadeIn 0.8s ease forwards 3.3s;
+}
+
+.navbutton {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.navbutton:hover {
+    transform: scale(1.1);
+    text-shadow: 0 0 15px white;
+}
+
+/* ========================= */
+/* MAIN CONTENT STRUCTURE */
+/* ========================= */
+#content {
+    opacity: 0;
+    animation: fadeIn 1s ease forwards 3s;
+    width: 100%;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+/* ========================= */
+/* INFO SECTION (Intro) */
+/* ========================= */
+#info {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center horizontally */
+    gap: 50px; /* Space between text and photo */
+    padding: 0 10%;
+    position: relative;
+}
+
+.info-text {
+    opacity: 0;
+    animation: fadeIn 1s ease forwards 3.6s;
+    max-width: 500px;
+}
+
+.text { font-size: 3rem; }
+.description { font-size: 1.2rem; margin-top: 10px; color: #ccc; }
+
+.name {
+    font-size: 3.5rem;
+    font-weight: bold;
+    display: block;
+    background: linear-gradient(90deg, #ffb347, #ff7000, #ffc85c, #ff7000, #ffb347);
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: auroraText 6s linear infinite;
+}
+
+@keyframes auroraText {
+    to { background-position: 300% 0%; }
+}
+
+/* PHOTO */
+#photo {
+    width: 300px;
+    height: 300px;
+    position: relative;
+    border-radius: 50%;
+    opacity: 0;
+    animation: fadeInUp 1.2s ease forwards 4.4s;
+}
+
+@keyframes fadeInUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+#photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    transition: 0.3s;
+    position: relative;
+    z-index: 2;
+}
+
+#photo:hover img { transform: scale(1.05); }
+
+/* PHOTO AURORA EFFECTS */
+#photo::after {
+    content: "";
+    position: absolute;
+    inset: -20px;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, #ffa50099, #ff8c004d, #ffa5001a, #ffa50099);
+    filter: blur(15px);
+    z-index: 1;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+#photo:hover::after {
+    opacity: 1;
+    animation: rotateAurora 5s linear infinite;
+}
+
+@keyframes rotateAurora {
+    to { transform: rotate(360deg); }
+}
+
+/* ========================= */
+/* ABOUT SECTION (Hobbies & Steam) */
+/* ========================= */
+#about {
+    min-height: 100vh;
+    padding: 100px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center everything */
+    justify-content: flex-start;
+    opacity: 0;
+    animation: fadeIn 1s ease forwards 3.8s;
+}
+
+.about-text {
+    font-size: 3rem;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+#steam-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center the cards */
+    gap: 30px;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.game-card {
+    background: #1b2838;
+    border-radius: 12px;
+    width: 300px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.game-card:hover {
+    transform: scale(1.05);
+}
+
+.game-card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+}
+
+.game-info {
+    padding: 20px;
+    text-align: center;
+}
+
+.game-info h3 { font-size: 1.2rem; margin-bottom: 8px; }
+.game-info p { color: #66c0f4; font-weight: bold; }
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+    #info { flex-direction: column; text-align: center; justify-content: center; }
+    .name { margin-left: 0; }
+}
