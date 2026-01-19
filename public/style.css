@@ -55,6 +55,7 @@ body {
     z-index: 100;
     opacity: 0;
     animation: fadeIn 0.8s ease forwards 3.3s;
+    backdrop-filter: blur(5px);
 }
 
 .navbutton {
@@ -147,14 +148,14 @@ body {
     z-index: 2;
 }
 
-#photo:hover img { transform: scale(1.05); }
+#photo:hover img { transform: scale(1.03); }
 
 /* PHOTO AURORA EFFECTS */
 #photo::after {
     content: "";
     position: absolute;
     inset: -20px;
-    border-radius: 50%;
+    border-radius: 90%;
     background: conic-gradient(from 0deg, #ffa50099, #ff8c004d, #ffa5001a, #ffa50099);
     filter: blur(15px);
     z-index: 1;
